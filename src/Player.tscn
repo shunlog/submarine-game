@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://RayCast2D.gd" type="Script" id=1]
 [ext_resource path="res://KinematicBody2D.gd" type="Script" id=2]
+[ext_resource path="res://light.png" type="Texture" id=3]
+[ext_resource path="res://flashlight.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 33.1361
@@ -18,3 +20,19 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 2, 2 )
+
+[node name="SurfaceLight" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+range_layer_min = -113
+shadow_enabled = true
+shadow_gradient_length = 2684.8
+shadow_filter = 1
+shadow_filter_smooth = 2.1
+
+[node name="Flashlight" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+energy = 2.27
+range_layer_min = -145
+range_layer_max = 2
+shadow_enabled = true
+shadow_gradient_length = 1326.7

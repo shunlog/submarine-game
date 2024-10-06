@@ -14,6 +14,14 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT:
 			$RayCast2D.enabled = event.pressed
 
+	
+func _process(delta):
+	var mouse_position = get_global_mouse_position()
+	var direction = mouse_position - global_position
+	var angle = direction.angle() 
+	$Flashlight.rotation = angle - PI / 2
+	
+	
 func _physics_process(delta):
 	var input_direction = Vector2.ZERO
 	
