@@ -17,6 +17,7 @@ func _process(_v):
 	if is_colliding():
 		p = get_collision_point()
 		get_parent().emit_signal("break_tile", p, 10)
+		update()
 	
 	
 
@@ -24,6 +25,7 @@ func _draw():
 	if is_colliding():
 		 # Draw a red circle at the point
 		draw_circle(to_local(p), 10, Color(1, 0, 0))
+		draw_line(position,to_local(p), Color(1, 0, 0))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

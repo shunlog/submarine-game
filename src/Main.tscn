@@ -69,13 +69,13 @@ stretch_mode = 1
 [node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
 color = Color( 0, 0, 0, 1 )
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 934, 1326 )
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="."]
-color = Color( 0.0470588, 0.0470588, 0.0470588, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="Shark" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1695, 1998 )
 
-[connection signal="break_tile" from="KinematicBody2D" to="TileMap" method="break_tile"]
+[connection signal="break_tile" from="Player" to="TileMap" method="break_tile"]
