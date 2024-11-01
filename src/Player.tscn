@@ -27,21 +27,23 @@ zoom = Vector2( 2, 2 )
 [node name="ShadowLight" type="Light2D" parent="."]
 texture = ExtResource( 3 )
 texture_scale = 6.48
+energy = 1.4
 range_z_min = 0
-range_layer_min = -113
+range_z_max = 751
+range_layer_min = -512
 shadow_enabled = true
-shadow_filter_smooth = 2.1
+shadow_gradient_length = 4.2
 
 [node name="GroundLight" type="Light2D" parent="."]
 texture = ExtResource( 3 )
-texture_scale = 4.73
-range_z_max = -1
-range_layer_min = -113
+texture_scale = 6.15
+energy = 1.43
+range_z_max = -2
+range_layer_min = -512
 shadow_filter_smooth = 2.1
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2, -12 )
 scale = Vector2( 0.296528, 0.296528 )
-z_index = -1
 z_as_relative = false
 texture = ExtResource( 5 )
