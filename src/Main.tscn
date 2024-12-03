@@ -247,12 +247,12 @@ script = ExtResource( 7 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_scale = Vector2( 0.2, 0.2 )
-motion_mirroring = Vector2( 2000, 2000 )
+motion_mirroring = Vector2( 4000, 4000 )
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 modulate = Color( 0.0352941, 0.0627451, 0.101961, 1 )
-margin_right = 2000.0
-margin_bottom = 2000.0
+margin_right = 4000.0
+margin_bottom = 4000.0
 texture = ExtResource( 5 )
 stretch_mode = 1
 
