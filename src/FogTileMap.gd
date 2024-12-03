@@ -10,7 +10,7 @@ func _ready():
 
 func update_fog():
 	# update the cells around the player
-	var r = 30
+	var r = 45
 	var pos = p.position / 16
 	for dx in range(-r, r):
 		for dy in range(-r, r):
