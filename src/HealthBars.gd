@@ -4,9 +4,11 @@ extends Node2D
 
 func _draw():
 	var tiles_health = get_parent().tiles_health
-	var max_tile_health = get_parent().max_tile_health
+	
 	# Draw health bars for all tiles being damaged
 	for tile_position in tiles_health.keys():
+		var tile = get_parent().get_cellv(tile_position)
+		var max_tile_health = get_parent().get_tile_init_health(tile)
 		var health_percent = float(tiles_health[tile_position]) / max_tile_health
 		var world_position = get_parent().map_to_world(tile_position)
 		var bar_width = 64  # Width of the health bar
