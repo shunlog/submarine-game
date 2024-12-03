@@ -37,7 +37,7 @@ shadow_gradient_length = 4.2
 [node name="GroundLight" type="Light2D" parent="."]
 texture = ExtResource( 3 )
 texture_scale = 6.15
-energy = 1.11
+energy = 0.87
 range_z_max = -2
 range_layer_min = -512
 shadow_filter_smooth = 2.1

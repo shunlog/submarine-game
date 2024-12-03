@@ -7,6 +7,11 @@ var max_tile_health = 100  # Max health for a tile
 func break_tile(posn: Vector2, damage: int):
 	var tile_position := world_to_map(posn)
 	if get_cellv(tile_position) == INVALID_CELL:
+		# try again, but move the point by 1 pixel
+		# because the RayCast2D will collide outside the tile on its right and bottom edges
+		posn += Vector2(-1, -1)
+		tile_position = world_to_map(posn) 
+	if get_cellv(tile_position) == INVALID_CELL:
 		return
 	if tiles_health.has(tile_position):
 		tiles_health[tile_position] -= damage
