@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal break_tile(posn, damage)
 
-var speed = 250  # units/s
+var speed = 150  # units/s
 var acceleration = 600  # units/s
 var friction = 600  # units/s
 

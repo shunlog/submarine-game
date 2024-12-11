@@ -3,7 +3,6 @@ extends TileMap
 var tiles_health = {}  # Dictionary to store health of tiles
 
 func get_tile_init_health(tile: int) -> int:
-	print(tile)
 	# Initial health points of each tile
 	if tile == 1:  # dirt
 		return 150

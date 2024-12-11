@@ -228,10 +228,14 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 947, 207 )
+position = Vector2( 1184, 68 )
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
 
 [node name="Shark" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1663, 1818 )
+position = Vector2( 2045, 80 )
 
 [node name="TransparentModulate" type="CanvasModulate" parent="."]
 position = Vector2( 0, 4 )
@@ -258,7 +262,7 @@ texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="BgModulate" type="CanvasModulate" parent="CanvasLayer/ParallaxBackground/ParallaxLayer/TextureRect"]
-color = Color( 0, 0.305882, 0.247059, 1 )
+color = Color( 0, 0.262745, 0.341176, 1 )
 
 [node name="FogTileMap" type="TileMap" parent="CanvasLayer"]
 visible = false
