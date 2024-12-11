@@ -5,20 +5,14 @@
 [ext_resource path="res://light.bmp" type="Texture" id=3]
 [ext_resource path="res://submarine.png" type="Texture" id=5]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 41.0
-height = 24.0
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 script = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2, -10 )
-rotation = -1.57079
-shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -43,7 +37,9 @@ range_layer_min = -512
 shadow_filter_smooth = 2.1
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2, -12 )
-scale = Vector2( 0.296528, 0.296528 )
-z_as_relative = false
+position = Vector2( -1, -1 )
+scale = Vector2( 0.222743, 0.222743 )
 texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
