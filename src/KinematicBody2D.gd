@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal break_tile(posn, damage)
 
-var max_speed = 200  # px/s
+var max_speed = 2000  # px/s
 var accel_fraction = 0.07  # fraction of the max_speed gained every frame on move
 var friction = .05  # fraction of velocity lost every frame in water
 var gravity_accel = 15  # px/s gained every second outside water
