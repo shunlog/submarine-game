@@ -46,8 +46,7 @@ func _physics_process(delta):
 		velocity += Vector2(0, gravity_accel)
 	
 	velocity = velocity.clamped(max_speed)
-	print(velocity.length())
-
+	
 	# Move the player with KinematicBody2D's move_and_slide method
 	velocity = move_and_slide(velocity)
 	
