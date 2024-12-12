@@ -23,22 +23,24 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 texture_scale = 6.48
 energy = 1.12
-range_z_min = 0
-range_z_max = 751
-range_layer_min = -512
+range_z_min = -20
+range_z_max = -1
+range_layer_min = -20
 shadow_enabled = true
 shadow_gradient_length = 4.2
 
 [node name="GroundLight" type="Light2D" parent="."]
 texture = ExtResource( 3 )
 texture_scale = 3.83
-range_z_max = -2
-range_layer_min = -512
+range_z_min = -30
+range_z_max = -11
+range_layer_min = -20
 shadow_filter_smooth = 2.1
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1, -1 )
 scale = Vector2( 0.222743, 0.222743 )
+z_index = 1
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

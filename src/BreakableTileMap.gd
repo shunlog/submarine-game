@@ -16,12 +16,13 @@ func get_tile_init_health(tile: int) -> int:
 
  
 func break_tile(posn: Vector2, damage: int):
+	posn = to_local(posn)
 	var tile_position := world_to_map(posn)
 	if get_cellv(tile_position) == INVALID_CELL:
 		# try again, but move the point by 1 pixel
 		# because the RayCast2D will collide outside the tile on its right and bottom edges
 		posn += Vector2(-1, -1)
-		tile_position = world_to_map(posn) 
+		tile_position = world_to_map(posn)
 	if get_cellv(tile_position) == INVALID_CELL:
 		return
 	

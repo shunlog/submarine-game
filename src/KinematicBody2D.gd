@@ -2,9 +2,10 @@ extends KinematicBody2D
 
 signal break_tile(posn, damage)
 
-var speed = 150  # units/s
-var acceleration = 600  # units/s
-var friction = 600  # units/s
+var max_speed = 300  # px/s
+var acceleration = 20  # px/s gained every second
+var friction = 8  # px/s lost every second in water
+var gravity_accel = 15  # px/s gained every second outside water
 
 var velocity = Vector2.ZERO  # Player's velocity
 
@@ -17,26 +18,27 @@ func _input(event):
 	
 	
 func _physics_process(delta):
-	var input_direction = Vector2.ZERO
+	var accel := Vector2.ZERO
 	
-	# Get input from arrow keys or WASD
+	var dirn := Vector2.ZERO
 	if Input.is_action_pressed("right"):
-		input_direction.x += 1
+		dirn.x += 1
 	if Input.is_action_pressed("left"):
-		input_direction.x -= 1
+		dirn.x -= 1
 	if Input.is_action_pressed("down"):
-		input_direction.y += 1
+		dirn.y += 1
 	if Input.is_action_pressed("up"):
-		input_direction.y -= 1
-
-	input_direction = input_direction.normalized()  # Normalize to prevent diagonal speed boost
+		dirn.y -= 1
+	accel += dirn.normalized() * acceleration
 	
-	if input_direction != Vector2.ZERO:
-		# Accelerate in the direction of input
-		velocity = velocity.move_toward(input_direction * speed, acceleration * delta)
+	var underwater := position.y > 0
+	if underwater:
+		velocity += accel
+		velocity = velocity.move_toward(Vector2.ZERO, friction)
 	else:
-		# Apply friction to slow down when no input is pressed
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		velocity += Vector2(0, gravity_accel)
+	
+	velocity = velocity.clamped(max_speed)
 
 	# Move the player with KinematicBody2D's move_and_slide method
 	velocity = move_and_slide(velocity)
