@@ -21,8 +21,8 @@ zoom = Vector2( 1.5, 1.5 )
 [node name="ShadowLight" type="Light2D" parent="."]
 position = Vector2( 0, 1 )
 texture = ExtResource( 3 )
-texture_scale = 6.48
-energy = 1.12
+texture_scale = 8.25
+energy = 1.54
 range_z_min = -20
 range_z_max = -1
 range_layer_min = -20
@@ -31,7 +31,9 @@ shadow_gradient_length = 4.2
 
 [node name="GroundLight" type="Light2D" parent="."]
 texture = ExtResource( 3 )
-texture_scale = 3.83
+texture_scale = 3.6
+color = Color( 0.615686, 0.788235, 1, 1 )
+energy = 1.21
 range_z_min = -30
 range_z_max = -11
 range_layer_min = -20
