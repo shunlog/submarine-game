@@ -2,43 +2,80 @@ tool
 extends Node2D
 
 # Adds a property in the Inspector
-export(bool) var call_function setget set_call_function
+export(bool) var generate setget set_generate
+export(bool) var clear setget set_clear
 
-func set_call_function(value):
+func set_generate(value):
 	if value:  # When toggled, call the function
 		generate_tiles()
-		call_function = false  # Reset the button
+		generate = false  # Reset the button
 
 
-var noise = OpenSimplexNoise.new()  # Create the noise generator
+func set_clear(value):
+	if value:  # When toggled, call the function
+		clear()
+		clear = false  # Reset the button
 
-# Parameters for noise and tilemap
+
+export var width = 100       # Width of the tilemap in tiles
+export var height = 300       # Height of the tilemap in tiles
 export var tile = 1
 export var replace := false
-export var width = 50       # Width of the tilemap in tiles
-export var height = 50       # Height of the tilemap in tiles
-export var noise_scale = 0.1       # Noise scale
-export var treshhold = 0.0
-export var multiplier = 1.0
+#export var treshold = 0.0
+
+export var noise_seed := 0
+export var noise_period := 10.0
+export var noise_octaves := 3
+export var noise_lacunarity := 2.0
+export var noise_persistence := 0.5
+export var density_gradient :Curve= Curve.new()
+
+func _ready():
+	density_gradient.min_value = -1
+
+
+func gen_image(noise: OpenSimplexNoise, sprite_node: Sprite):
+	var img :Image= noise.get_image(width, height)
+	# Create texture from the image
+	var texture = ImageTexture.new()
+	texture.create_from_image(img)
+	sprite_node.texture = texture
 
 
 func generate_tiles():
-	var tilemap: TileMap = get_parent()  # Drag your TileMap node here in the editor
-	for x in range(width):
-		for y in range(height):
+	var noise = OpenSimplexNoise.new()
+	noise.period = noise_period
+	noise.octaves = noise_octaves
+	noise.lacunarity = noise_lacunarity
+	noise.persistence = noise_persistence
+	noise.seed = noise_seed
+
+	var tilemap: TileMap = get_parent()
+	gen_image(noise, tilemap.find_node('Sprite'))
+	
+	var rng = RandomNumberGenerator.new()
+	rng.seed = 1234
+	
+	for y in range(height):
+		var y_ratio :float= float(y) / height
+		for x in range(width):
 			# Get noise value for each tile position
-			var nx = x * noise_scale
-			var ny = y * noise_scale
-			var value = noise.get_noise_2d(nx, ny) * multiplier
-
+			var noise_value = noise.get_noise_2d(x, y)
+			var treshold = density_gradient.interpolate(y_ratio)
+			
 			if replace:
-				print()
-				if tilemap.get_cell(x, y) != tilemap.INVALID_CELL \
-					and value > treshhold:
+				if tilemap.get_cell(x, y) == tilemap.INVALID_CELL:
+					continue
+				if noise_value > treshold:
 					tilemap.set_cell(x, y, tile)
-
-			elif not replace:
-				if value > treshhold:
-						tilemap.set_cell(x, y, tile)
-				else:
+			else:
+				if noise_value > treshold:
+					tilemap.set_cell(x, y, tile)
+				elif not replace:
 					tilemap.set_cell(x, y, -1)
+
+
+
+func clear():
+	var tilemap: TileMap = get_parent()
+	tilemap.clear()
