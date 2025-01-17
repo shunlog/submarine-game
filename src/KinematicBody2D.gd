@@ -49,5 +49,9 @@ func _physics_process(delta):
 	
 	# Move the player with KinematicBody2D's move_and_slide method
 	velocity = move_and_slide(velocity)
-	
-		
+
+
+func _on_Area2DRadar_area_entered(area: Area2D):
+	# Assuming the Area2D is a child of the enemy with a "target" method
+	var actor = area.get_parent()
+	actor.target(self)
