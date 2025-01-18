@@ -37,7 +37,7 @@ func _physics_process(delta):
 	elif dirn.x == 1:
 		sprite.flip_h = false
 	
-	var underwater := position.y > 0
+	var underwater := position.y > 10
 	if underwater:
 		velocity += force
 		velocity -= velocity * friction

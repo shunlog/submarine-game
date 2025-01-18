@@ -142,7 +142,7 @@ scale = Vector2( 42, 42 )
 grid_size = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2476, 1255 )
+position = Vector2( 2584, 1111 )
 
 [node name="World" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 1721 )
