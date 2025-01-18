@@ -5,7 +5,7 @@ onready var p := get_tree().get_root().get_node("Node2D/Player")
 
 func _ready():
 	# it's useful to have it set to invisible in the editor
-	visible = true
+#	visible = true
 
 
 func update_fog():

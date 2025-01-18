@@ -25,10 +25,25 @@ zoom = Vector2( 1.34, 1.34 )
 [node name="ShadowLight" type="Light2D" parent="."]
 position = Vector2( 0, 1 )
 texture = ExtResource( 5 )
-texture_scale = 1.5
-range_z_min = -20
-range_z_max = -1
-range_layer_min = -20
+texture_scale = 3.42
+mode = 2
+range_z_min = -817
+range_layer_min = -1
+range_layer_max = -1
+shadow_enabled = true
+shadow_gradient_length = 4.2
+
+[node name="BgLight" type="Light2D" parent="."]
+position = Vector2( 0, 1 )
+scale = Vector2( 0.991296, 0.991988 )
+texture = ExtResource( 5 )
+texture_scale = 3.3
+color = Color( 0.0509804, 0.227451, 0.356863, 1 )
+mode = 2
+range_z_min = -100
+range_z_max = -100
+range_layer_min = -100
+range_layer_max = -100
 shadow_enabled = true
 shadow_gradient_length = 4.2
 
