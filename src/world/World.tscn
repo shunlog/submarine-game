@@ -6,7 +6,7 @@
 [sub_resource type="Gradient" id=25]
 interpolation_mode = 2
 offsets = PoolRealArray( 0.0248447, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.398438, 0.859009, 1, 0 )
+colors = PoolColorArray( 0.470588, 0.925551, 1, 0.94902, 0.398438, 0.859009, 1, 0 )
 
 [sub_resource type="GradientTexture2D" id=22]
 gradient = SubResource( 25 )
@@ -40,9 +40,6 @@ margin_bottom = 4000.0
 texture = ExtResource( 1 )
 stretch_mode = 1
 
-[node name="BgModulate" type="CanvasModulate" parent="WaterParallaxBackground2/ParallaxLayer"]
-color = Color( 0.0470588, 0.0705882, 0.105882, 1 )
-
 [node name="HighlightParallaxLayer" type="ParallaxLayer" parent="WaterParallaxBackground2"]
 z_index = -21
 motion_mirroring = Vector2( 4000, 0 )
@@ -51,6 +48,10 @@ motion_mirroring = Vector2( 4000, 0 )
 margin_right = 4000.0
 margin_bottom = 3325.0
 texture = SubResource( 22 )
+
+[node name="BgModulate" type="CanvasModulate" parent="WaterParallaxBackground2"]
+position = Vector2( 955, 27 )
+color = Color( 0, 0.00784314, 0.027451, 1 )
 
 [node name="SkyParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
