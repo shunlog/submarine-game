@@ -1,21 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/MainTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://FlatUI/kenneyUI-blue.tres" type="Theme" id=3]
+[ext_resource path="res://shark/Shark.tscn" type="PackedScene" id=4]
 
 [node name="TestTilemap" type="Node2D"]
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 996 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2859, 649 )
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
+rect_scale = Vector2( 1.00376, 1 )
 theme = ExtResource( 3 )
 text = "This scene tests two things:
 1. That the player is standalone
 2. What the main tilemap feels like without any extra noise"
+
+[node name="Shark" parent="." instance=ExtResource( 4 )]
+position = Vector2( 146, 670 )
 
 [connection signal="break_tile" from="Player" to="TileMap" method="break_tile"]

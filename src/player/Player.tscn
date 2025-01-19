@@ -189,7 +189,7 @@ margin_bottom = 980.0
 
 [node name="dashboard" type="VBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
 margin_right = 800.0
-margin_bottom = 98.0
+margin_bottom = 132.0
 rect_min_size = Vector2( 800, 0 )
 size_flags_horizontal = 0
 
@@ -218,7 +218,26 @@ margin_bottom = 30.0
 size_flags_horizontal = 3
 text = "Hull:"
 
-[node name="ProgressBar" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/hull"]
+[node name="ProgressBarHull" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/hull"]
+margin_left = 269.0
+margin_right = 800.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 20.0
+
+[node name="fuel" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard"]
+margin_top = 68.0
+margin_right = 800.0
+margin_bottom = 98.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/fuel"]
+margin_right = 265.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Fuel:"
+
+[node name="ProgressBarFuel" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/fuel"]
 margin_left = 269.0
 margin_right = 800.0
 margin_bottom = 27.0
@@ -227,9 +246,9 @@ size_flags_stretch_ratio = 2.0
 value = 20.0
 
 [node name="pressure" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard"]
-margin_top = 68.0
+margin_top = 102.0
 margin_right = 800.0
-margin_bottom = 98.0
+margin_bottom = 132.0
 
 [node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure"]
 margin_right = 265.0
@@ -237,16 +256,15 @@ margin_bottom = 30.0
 size_flags_horizontal = 3
 text = "Pressure:"
 
-[node name="ProgressBar" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure"]
+[node name="ProgressBarPressure" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure"]
 margin_left = 269.0
 margin_right = 800.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-value = 20.0
 
 [node name="spacer" type="Control" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
-margin_top = 102.0
+margin_top = 136.0
 margin_right = 1820.0
 margin_bottom = 878.0
 size_flags_vertical = 3
@@ -270,32 +288,32 @@ margin_left = 79.0
 margin_right = 79.0
 margin_bottom = 30.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
+[node name="speed" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
 margin_top = 34.0
 margin_right = 1820.0
 margin_bottom = 64.0
 
-[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer"]
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/speed"]
 margin_right = 119.0
 margin_bottom = 30.0
 text = "Speed:"
 
-[node name="LabelSpeed" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer"]
+[node name="LabelSpeed" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/speed"]
 margin_left = 123.0
 margin_right = 123.0
 margin_bottom = 30.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
+[node name="sonar" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
 margin_top = 68.0
 margin_right = 1820.0
 margin_bottom = 98.0
 
-[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer2"]
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/sonar"]
 margin_right = 119.0
 margin_bottom = 30.0
 text = "Sonar:"
 
-[node name="LabelSonar" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer2"]
+[node name="LabelSonar" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/sonar"]
 margin_left = 123.0
 margin_right = 123.0
 margin_bottom = 30.0

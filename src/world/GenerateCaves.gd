@@ -51,7 +51,7 @@ func generate_tiles():
 	noise.seed = noise_seed
 
 	var tilemap: TileMap = get_parent()
-	gen_image(noise, tilemap.find_node('Sprite'))
+#	gen_image(noise, tilemap.find_node('Sprite'))
 	
 	var rng = RandomNumberGenerator.new()
 	rng.seed = 1234
