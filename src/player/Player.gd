@@ -19,7 +19,7 @@ onready var sprite := $Sprite
 onready var NodeShadow := $ShadowLight
 onready var LabelSpeed := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer/LabelSpeed
 onready var LabelSonar := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer2/LabelSonar
-
+onready var LabelFPS := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/fps/LabelFPS
 
 func toggle_sonar(v: bool = !sonar):
 	sonar = v
@@ -86,3 +86,4 @@ func _on_Area2DRadar_area_entered(area: Area2D):
 
 func _update_labels():
 	LabelSpeed.text = '%8.2f' % [velocity.length()]
+	LabelFPS.text = str(Engine.get_frames_per_second())

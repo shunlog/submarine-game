@@ -248,17 +248,32 @@ value = 20.0
 [node name="spacer" type="Control" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
 margin_top = 102.0
 margin_right = 1820.0
-margin_bottom = 912.0
+margin_bottom = 878.0
 size_flags_vertical = 3
 
 [node name="debug" type="VBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
-margin_top = 916.0
+margin_top = 882.0
 margin_right = 1820.0
 margin_bottom = 980.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
+[node name="fps" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
 margin_right = 1820.0
 margin_bottom = 30.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/fps"]
+margin_right = 75.0
+margin_bottom = 30.0
+text = "FPS:"
+
+[node name="LabelFPS" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/fps"]
+margin_left = 79.0
+margin_right = 79.0
+margin_bottom = 30.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
+margin_top = 34.0
+margin_right = 1820.0
+margin_bottom = 64.0
 
 [node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer"]
 margin_right = 119.0
@@ -271,9 +286,9 @@ margin_right = 123.0
 margin_bottom = 30.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
-margin_top = 34.0
+margin_top = 68.0
 margin_right = 1820.0
-margin_bottom = 64.0
+margin_bottom = 98.0
 
 [node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer2"]
 margin_right = 119.0

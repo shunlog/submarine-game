@@ -21,7 +21,7 @@ export var width = 100       # Width of the tilemap in tiles
 export var height = 300       # Height of the tilemap in tiles
 export var tile = 1
 export var replace := false
-#export var treshold = 0.0
+#export var min_treshold = 0.0
 
 export var noise_seed := 0
 export var noise_period := 10.0
@@ -61,15 +61,16 @@ func generate_tiles():
 		for x in range(width):
 			# Get noise value for each tile position
 			var noise_value = noise.get_noise_2d(x, y)
-			var treshold = density_gradient.interpolate(y_ratio)
+			# the threshold is the oposite of the curve value (for convenience)
+			var min_treshold = -density_gradient.interpolate(y_ratio)
 			
 			if replace:
 				if tilemap.get_cell(x, y) == tilemap.INVALID_CELL:
 					continue
-				if noise_value > treshold:
+				if noise_value > min_treshold:
 					tilemap.set_cell(x, y, tile)
 			else:
-				if noise_value > treshold:
+				if noise_value > min_treshold:
 					tilemap.set_cell(x, y, tile)
 				elif not replace:
 					tilemap.set_cell(x, y, -1)
