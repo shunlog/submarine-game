@@ -338,4 +338,3 @@ text = "100"
 [connection signal="area_entered" from="Area2DRadar" to="." method="_on_Area2DRadar_area_entered"]
 [connection signal="value_changed" from="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed" to="." method="set_speed_level"]
 [connection signal="pressed" from="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed" to="." method="buy_speed"]
-[connection signal="pressed" from="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonMining" to="." method="buy_speed"]

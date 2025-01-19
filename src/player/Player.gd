@@ -31,6 +31,7 @@ var sonar := false
 
 onready var sprite := $Sprite
 onready var NodeShadow := $ShadowLight
+onready var PauseMenu := $PauseCanvasLayer
 onready var LabelSpeed := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/speed/LabelSpeed
 onready var LabelSonar := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/sonar/LabelSonar
 onready var LabelFPS := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/fps/LabelFPS
@@ -40,6 +41,7 @@ onready var ProgressBarFuel := $GUICanvasLayer/MarginContainer/VBoxContainer/das
 onready var ProgressBarPressure := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure/ProgressBarPressure
 onready var ButtonSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed
 onready var HSliderSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed
+
 
 const speed_price = [100, 200, 300, 400]
 
@@ -69,14 +71,20 @@ func toggle_sonar(v: bool = !sonar):
 	NodeShadow.color = sonar_color if v else Color.white
 
 func _get_tile_price(tile_id):
-	return 10
+	if tile_id == 3:
+		return 10
+	elif tile_id == 4:
+		return 50
+	elif tile_id == 5:
+		return 100
+	elif tile_id == 7:
+		return 500
+	else:
+		return 0
 
 func tile_broken(tile_id: int):
 	print(tile_id)
 	money += _get_tile_price(tile_id)
-
-
-onready var PauseMenu := $PauseCanvasLayer
 
 
 func _ready():
