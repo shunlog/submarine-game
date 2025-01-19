@@ -22,9 +22,10 @@ var max_pressure := initial_max_pressure
 
 # State variables
 var velocity := Vector2.ZERO  # Player's velocitym
+var speed_level := 0 setget set_speed_level  # int in range [0, 4]
 var hull := max_hull
 var fuel := max_fuel
-var money := 0
+var money := 600
 var sonar := false
 
 
@@ -37,18 +38,35 @@ onready var LabelMoney := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboar
 onready var ProgressBarHull := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/hull/ProgressBarHull
 onready var ProgressBarFuel := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/fuel/ProgressBarFuel
 onready var ProgressBarPressure := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure/ProgressBarPressure
+onready var ButtonSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed
+onready var HSliderSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed
+
+const speed_price = [100, 200, 300, 400]
+
+
+## v is between 0 and 4
+func set_speed_level(v: int):
+	speed_level = v
+	max_speed = initial_max_speed * (1 + 0.2 * v)
+	_update_pause_menu()
+
+
+func buy_speed():
+	if speed_level >= speed_price.size():
+		return
+	if speed_price[speed_level] > money:
+		return
+	money -= speed_price[speed_level]
+	set_speed_level(min(speed_level + 1, 4))
+	_update_dashboard()
+
+
 
 func toggle_sonar(v: bool = !sonar):
 	sonar = v
 	LabelSonar.text = str(v)
 	NodeShadow.shadow_enabled = !v
 	NodeShadow.color = sonar_color if v else Color.white
-
-
-## v is between 0 and 4
-func set_speed(v: float):
-	max_speed = initial_max_speed * (1 + 0.2 * v)
-
 
 func _get_tile_price(tile_id):
 	return 10
@@ -57,8 +75,13 @@ func tile_broken(tile_id: int):
 	print(tile_id)
 	money += _get_tile_price(tile_id)
 
+
+onready var PauseMenu := $PauseCanvasLayer
+
+
 func _ready():
 	toggle_sonar(false)
+	PauseMenu.hide()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -119,3 +142,22 @@ func _update_dashboard():
 	ProgressBarFuel.value = fuel / max_fuel * 100
 	ProgressBarHull.value = hull / max_hull * 100
 	ProgressBarPressure.value = _get_depth_blocks() / max_pressure * 100
+
+
+func _update_pause_menu():
+	print("updated pause menu")
+	HSliderSpeed.value = speed_level
+	if speed_level >= speed_price.size():
+		ButtonSpeed.text = "done"
+		ButtonSpeed.disabled = true
+		ButtonSpeed.pressed = false
+	else:
+		ButtonSpeed.text = str(speed_price[speed_level])
+		
+		if speed_price[speed_level] > money:
+			ButtonSpeed.disabled = true
+			ButtonSpeed.pressed = false
+		else:
+			ButtonSpeed.disabled = false
+			ButtonSpeed.pressed = true
+	
