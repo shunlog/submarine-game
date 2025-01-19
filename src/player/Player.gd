@@ -11,13 +11,16 @@ var velocity := Vector2.ZERO  # Player's velocity
 onready var sprite : Sprite = $Sprite
 
 
+func set_speed(v: float):
+	print(v)
+
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			$RayCast2D.enabled = event.pressed
 
-	
-	
+
 func _physics_process(delta):
 	var move_accel = max_speed * accel_fraction  # px/s gained every second
 	var force := Vector2.ZERO

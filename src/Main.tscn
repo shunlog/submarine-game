@@ -73,7 +73,7 @@ follow_viewport_enable = true
 
 [node name="TilesModulate" type="CanvasModulate" parent="GroundCanvasLayer"]
 position = Vector2( 193, 283 )
-color = Color( 0.0784314, 0.14902, 0.27451, 1 )
+color = Color( 0.0627451, 0.188235, 0.411765, 1 )
 
 [node name="TileMap" parent="GroundCanvasLayer" instance=ExtResource( 5 )]
 position = Vector2( 0, 1787 )
@@ -95,6 +95,7 @@ density_gradient = SubResource( 26 )
 
 [node name="GUICanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
+layer = 2
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="GUICanvasLayer"]
@@ -154,6 +155,7 @@ margin_bottom = 42.0
 size_flags_horizontal = 3
 max_value = 5.0
 value = 5.0
+rounded = true
 tick_count = 6
 ticks_on_borders = true
 
@@ -185,12 +187,13 @@ z_index = -1
 position = Vector2( 1832, 1291 )
 z_index = -1
 
-[node name="Fog" parent="." instance=ExtResource( 9 )]
+[node name="Fog" parent="TransparentCanvasLayer" instance=ExtResource( 9 )]
 scale = Vector2( 42, 42 )
+z_index = -2
 grid_size = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3998, 1807 )
+position = Vector2( 4064, 1653 )
 
 [node name="World" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 1721 )
@@ -202,4 +205,5 @@ material = SubResource( 28 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[connection signal="value_changed" from="GUICanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/HSlider" to="Player" method="set_speed"]
 [connection signal="break_tile" from="Player" to="GroundCanvasLayer/TileMap" method="break_tile"]
