@@ -80,12 +80,13 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DRadar"]
 shape = SubResource( 2 )
 
-[node name="GUICanvasLayer" type="CanvasLayer" parent="."]
+[node name="PauseCanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
-layer = 2
+layer = 3
+visible = false
 script = ExtResource( 5 )
 
-[node name="MarginContainer" type="MarginContainer" parent="GUICanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseCanvasLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -97,53 +98,192 @@ margin_bottom = 250.0
 rect_min_size = Vector2( 1000, 500 )
 theme = ExtResource( 7 )
 
-[node name="Panel" type="Panel" parent="GUICanvasLayer/MarginContainer"]
+[node name="Panel" type="Panel" parent="PauseCanvasLayer/MarginContainer"]
 self_modulate = Color( 1, 1, 1, 0.623529 )
 margin_right = 1000.0
 margin_bottom = 500.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="GUICanvasLayer/MarginContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseCanvasLayer/MarginContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
-margin_top = 25.0
-margin_right = -25.0
-margin_bottom = -25.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUICanvasLayer/MarginContainer/Panel/MarginContainer"]
-margin_right = 950.0
-margin_bottom = 450.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer"]
+margin_right = 940.0
+margin_bottom = 440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer"]
-margin_right = 950.0
+[node name="Label" type="Label" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+margin_right = 940.0
 margin_bottom = 30.0
 text = "Shop"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="speed" type="HBoxContainer" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer"]
 margin_top = 34.0
-margin_right = 950.0
+margin_right = 940.0
 margin_bottom = 76.0
 
-[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/speed"]
 margin_top = 6.0
-margin_right = 110.0
+margin_right = 312.0
 margin_bottom = 36.0
+size_flags_horizontal = 3
 text = "Speed"
 
-[node name="HSlider" type="HSlider" parent="GUICanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 114.0
-margin_right = 950.0
+[node name="HSlider" type="HSlider" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/speed"]
+margin_left = 316.0
+margin_right = 940.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
-max_value = 5.0
-value = 5.0
+size_flags_stretch_ratio = 2.0
+max_value = 4.0
 rounded = true
-tick_count = 6
+tick_count = 5
 ticks_on_borders = true
 
+[node name="mining" type="HBoxContainer" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 940.0
+margin_bottom = 122.0
+
+[node name="Label" type="Label" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/mining"]
+margin_top = 6.0
+margin_right = 312.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+text = "Mining speed"
+
+[node name="HSlider" type="HSlider" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/mining"]
+margin_left = 316.0
+margin_right = 940.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+max_value = 4.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="GUICanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUICanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = -50.0
+margin_bottom = -50.0
+theme = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUICanvasLayer/MarginContainer"]
+margin_right = 1820.0
+margin_bottom = 980.0
+
+[node name="dashboard" type="VBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
+margin_right = 800.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 800, 0 )
+size_flags_horizontal = 0
+
+[node name="money" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard"]
+margin_right = 800.0
+margin_bottom = 30.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/money"]
+margin_right = 125.0
+margin_bottom = 30.0
+text = "Money:"
+
+[node name="LabelMoney" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/money"]
+margin_left = 129.0
+margin_right = 129.0
+margin_bottom = 30.0
+
+[node name="hull" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard"]
+margin_top = 34.0
+margin_right = 800.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/hull"]
+margin_right = 265.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Hull:"
+
+[node name="ProgressBar" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/hull"]
+margin_left = 269.0
+margin_right = 800.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 20.0
+
+[node name="pressure" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard"]
+margin_top = 68.0
+margin_right = 800.0
+margin_bottom = 98.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure"]
+margin_right = 265.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Pressure:"
+
+[node name="ProgressBar" type="ProgressBar" parent="GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure"]
+margin_left = 269.0
+margin_right = 800.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 20.0
+
+[node name="spacer" type="Control" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
+margin_top = 102.0
+margin_right = 1820.0
+margin_bottom = 912.0
+size_flags_vertical = 3
+
+[node name="debug" type="VBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer"]
+margin_top = 916.0
+margin_right = 1820.0
+margin_bottom = 980.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
+margin_right = 1820.0
+margin_bottom = 30.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer"]
+margin_right = 119.0
+margin_bottom = 30.0
+text = "Speed:"
+
+[node name="LabelSpeed" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer"]
+margin_left = 123.0
+margin_right = 123.0
+margin_bottom = 30.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug"]
+margin_top = 34.0
+margin_right = 1820.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer2"]
+margin_right = 119.0
+margin_bottom = 30.0
+text = "Sonar:"
+
+[node name="LabelSonar" type="Label" parent="GUICanvasLayer/MarginContainer/VBoxContainer/debug/HBoxContainer2"]
+margin_left = 123.0
+margin_right = 123.0
+margin_bottom = 30.0
+
 [connection signal="area_entered" from="Area2DRadar" to="." method="_on_Area2DRadar_area_entered"]
+[connection signal="value_changed" from="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/speed/HSlider" to="." method="set_speed"]
