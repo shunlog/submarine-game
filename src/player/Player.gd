@@ -10,6 +10,18 @@ var gravity_accel = 15  # px/s gained every second outside water
 var velocity := Vector2.ZERO  # Player's velocity
 onready var sprite : Sprite = $Sprite
 
+export var sonar_color : Color
+
+var sonar := false
+func toggle_sonar(v: bool = !sonar):
+	sonar = v
+	if v:
+		$ShadowLight.color = sonar_color
+		$ShadowLight.shadow_enabled = false
+	else:
+		$ShadowLight.color = Color.white
+		$ShadowLight.shadow_enabled = true
+
 
 func set_speed(v: float):
 	print(v)
@@ -19,6 +31,8 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			$RayCast2D.enabled = event.pressed
+	elif event.is_action_pressed("sonar"):
+		toggle_sonar()
 
 
 func _physics_process(delta):

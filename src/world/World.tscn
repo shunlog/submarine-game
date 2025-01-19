@@ -1,18 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://world/water_bg.bmp" type="Texture" id=1]
 [ext_resource path="res://world/clouds.png" type="Texture" id=8]
-
-[sub_resource type="Gradient" id=25]
-interpolation_mode = 2
-offsets = PoolRealArray( 0.0248447, 1 )
-colors = PoolColorArray( 0.470588, 0.925551, 1, 0.94902, 0.398438, 0.859009, 1, 0 )
-
-[sub_resource type="GradientTexture2D" id=22]
-gradient = SubResource( 25 )
-width = 4000
-height = 3325
-fill_to = Vector2( 0, 1 )
 
 [sub_resource type="Gradient" id=23]
 offsets = PoolRealArray( 0.597765, 1 )
@@ -40,21 +29,12 @@ margin_bottom = 4000.0
 texture = ExtResource( 1 )
 stretch_mode = 1
 
-[node name="HighlightParallaxLayer" type="ParallaxLayer" parent="WaterParallaxBackground2"]
-z_index = -21
-motion_mirroring = Vector2( 4000, 0 )
-
-[node name="Gradient" type="TextureRect" parent="WaterParallaxBackground2/HighlightParallaxLayer"]
-margin_right = 4000.0
-margin_bottom = 3325.0
-texture = SubResource( 22 )
-
 [node name="BgModulate" type="CanvasModulate" parent="WaterParallaxBackground2"]
 position = Vector2( 955, 27 )
 color = Color( 0, 0.00784314, 0.027451, 1 )
 
 [node name="SkyParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -1
+layer = -5
 
 [node name="SkyParallaxLayer" type="ParallaxLayer" parent="SkyParallaxBackground"]
 z_index = -46
