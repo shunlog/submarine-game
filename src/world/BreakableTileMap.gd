@@ -1,6 +1,8 @@
 tool
 extends TileMap
 
+signal tile_broken(tile_id)
+
 var tiles_health = {}  # Dictionary to store health of tiles
 
 ## Run all the generation layers,
@@ -49,6 +51,7 @@ func break_tile(posn: Vector2, damage: int):
 		if tiles_health[tile_position] <= 0:
 			set_cellv(tile_position, -1)
 			tiles_health.erase(tile_position)
+			emit_signal("tile_broken", tile)
 	else:
 		var h = get_tile_init_health(tile)
 		tiles_health[tile_position] = h - damage

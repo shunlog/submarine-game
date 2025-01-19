@@ -50,6 +50,13 @@ func set_speed(v: float):
 	max_speed = initial_max_speed * (1 + 0.2 * v)
 
 
+func _get_tile_price(tile_id):
+	return 10
+
+func tile_broken(tile_id: int):
+	print(tile_id)
+	money += _get_tile_price(tile_id)
+
 func _ready():
 	toggle_sonar(false)
 

@@ -116,3 +116,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [connection signal="break_tile" from="Player" to="GroundCanvasLayer/TileMap" method="break_tile"]
+[connection signal="tile_broken" from="GroundCanvasLayer/TileMap" to="Player" method="tile_broken"]
