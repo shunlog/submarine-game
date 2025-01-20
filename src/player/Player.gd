@@ -36,6 +36,7 @@ onready var LabelSpeed := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/sp
 onready var LabelSonar := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/sonar/LabelSonar
 onready var LabelFPS := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/fps/LabelFPS
 onready var LabelMoney := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/money/LabelMoney
+onready var LabelEnemies := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/enemies/LabelEnemies
 onready var ProgressBarHull := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/hull/ProgressBarHull
 onready var ProgressBarFuel := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/fuel/ProgressBarFuel
 onready var ProgressBarPressure := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure/ProgressBarPressure
@@ -147,9 +148,11 @@ func _update_dashboard():
 	LabelSpeed.text = '%8.2f' % [velocity.length()]
 	LabelFPS.text = str(Engine.get_frames_per_second())
 	LabelMoney.text = str(money)
+	LabelEnemies.text = str(get_tree().get_nodes_in_group("enemies").size())
 	ProgressBarFuel.value = fuel / max_fuel * 100
 	ProgressBarHull.value = hull / max_hull * 100
 	ProgressBarPressure.value = _get_depth_blocks() / max_pressure * 100
+	
 
 
 func _update_pause_menu():

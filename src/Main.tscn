@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://world/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world/MainTileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://spawner/Spawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://shark/Shark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
 [ext_resource path="res://fog/Fog.tscn" type="PackedScene" id=9]
 
@@ -88,26 +87,6 @@ follow_viewport_enable = true
 [node name="TransparentModulate" type="CanvasModulate" parent="TransparentCanvasLayer"]
 position = Vector2( 0, -13 )
 color = Color( 0.439216, 0.0901961, 0.0901961, 0 )
-
-[node name="Shark" parent="TransparentCanvasLayer" instance=ExtResource( 6 )]
-position = Vector2( 2324, 1721 )
-z_index = -1
-
-[node name="Shark2" parent="TransparentCanvasLayer" instance=ExtResource( 6 )]
-position = Vector2( 3348, 1619 )
-z_index = -1
-
-[node name="Shark3" parent="TransparentCanvasLayer" instance=ExtResource( 6 )]
-position = Vector2( 2893, 867 )
-z_index = -1
-
-[node name="Shark4" parent="TransparentCanvasLayer" instance=ExtResource( 6 )]
-position = Vector2( 2197, 649 )
-z_index = -1
-
-[node name="Shark5" parent="TransparentCanvasLayer" instance=ExtResource( 6 )]
-position = Vector2( 1832, 1291 )
-z_index = -1
 
 [node name="Sharks" type="Node2D" parent="TransparentCanvasLayer"]
 
