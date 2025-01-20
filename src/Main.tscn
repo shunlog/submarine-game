@@ -32,6 +32,7 @@ grid_size = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 4064, 1653 )
+sonar_color = Color( 0, 0, 0, 1 )
 
 [node name="Spawner" parent="Player" instance=ExtResource( 4 )]
 enemies_parent_nodepath = NodePath("../../TransparentCanvasLayer/Sharks")

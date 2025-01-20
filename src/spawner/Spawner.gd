@@ -13,19 +13,19 @@ func try_spawn():
 	var radius = shape.radius
 	var angle = randf() * TAU  # Random angle
 	var distance = sqrt(randf()) * radius  # Random distance (sqrt for uniform distribution)
-	var off_pos = position + Vector2(cos(angle), sin(angle)) * distance
+	var local_to = position + Vector2(cos(angle), sin(angle)) * distance
 	
-	ray.cast_to = off_pos
+	ray.cast_to = local_to
 	ray.force_raycast_update()
 	if not ray.is_colliding():
 		return false
 	
-	var spawn_pos = to_global(off_pos)
+	var spawn_pos = to_global(local_to)
 	var enemy = enemy_scene.instance()
 	enemy.position = spawn_pos
 	enemies_parent.add_child(enemy)
 	
-	var collision = enemy.move_and_collide(Vector2.UP, true, true, true)
+	var collision = enemy.move_and_collide(Vector2.ZERO, true, true, true)
 	if collision:
 		enemy.queue_free()  # Remove if invalid
 		return false

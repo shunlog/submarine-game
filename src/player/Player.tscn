@@ -1,58 +1,70 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=23 format=2]
 
+[ext_resource path="res://player/red.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 [ext_resource path="res://player/submarine.png" type="Texture" id=3]
 [ext_resource path="res://player/256x256 textures (34).png" type="Texture" id=4]
 [ext_resource path="res://player/PauseCanvasLayer.gd" type="Script" id=5]
 [ext_resource path="res://player/gradient_circle.png" type="Texture" id=6]
 [ext_resource path="res://FlatUI/kenneyUI-blue.tres" type="Theme" id=7]
-
-[sub_resource type="GDScript" id=5]
-script/source = "extends RayCast2D
-
-
-var collision_pos := Vector2.ZERO
-
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
-			self.enabled = event.pressed
-
-
-func _physics_process(delta):
-	var mouse_position = get_local_mouse_position()
-	var relative_position = mouse_position
-	cast_to = relative_position.clamped(500)
-	
-	if is_colliding():
-		collision_pos = get_collision_point()
-		get_parent().emit_signal(\"break_tile\", collision_pos, 10)
-		$HitBox.global_position = collision_pos
-		$HitBox.monitoring = true
-		_update_hitbox()
-		update()
-	else:
-		$HitBox.monitoring = false
-		
-
-func _update_hitbox():
-	## should be called in _physics_process
-	var areas = $HitBox.get_overlapping_areas()
-	for a in areas:
-		var parent = a.get_parent()
-		if parent.is_in_group(\"enemies\"):
-			parent.hurt(1)
-
-
-func _draw():
-	if is_colliding():
-		 # Draw a red circle at the point
-		draw_circle(to_local(collision_pos), 10, Color(1, 0, 0))
-		draw_line(position,to_local(collision_pos), Color(1, 0, 0))
-"
+[ext_resource path="res://player/Laser.gd" type="Script" id=8]
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 58.0345
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.0148515, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.927734, 1, 0, 0 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+min_value = -1.0
+_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 56.46
+initial_velocity_random = 0.05
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+linear_accel_random = 0.2
+damping = 12.9
+damping_random = 0.04
+color = Color( 1, 0, 0, 1 )
+color_ramp = SubResource( 7 )
+hue_variation_curve = SubResource( 9 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "default",
+"speed": 18.0
+} ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.0
@@ -66,12 +78,11 @@ radius = 27.0185
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 2 )
-sonar_color = Color( 0.054902, 1, 0, 1 )
 
 [node name="Laser" type="RayCast2D" parent="."]
 collision_mask = 3
 collide_with_areas = true
-script = SubResource( 5 )
+script = ExtResource( 8 )
 
 [node name="HitBox" type="Area2D" parent="Laser"]
 collision_layer = 0
@@ -80,6 +91,19 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/HitBox"]
 shape = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="Laser"]
+position = Vector2( 77, 28 )
+emitting = false
+amount = 899
+process_material = SubResource( 10 )
+
+[node name="Beam" type="AnimatedSprite" parent="Laser"]
+position = Vector2( 93, 0 )
+scale = Vector2( 3.25, 3.25 )
+z_index = 1
+frames = SubResource( 11 )
+playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

@@ -20,9 +20,13 @@ func _physics_process(delta):
 		$HitBox.global_position = collision_pos
 		$HitBox.monitoring = true
 		_update_hitbox()
+		$Beam.visible = true
+		$Beam.global_position = collision_pos
+		$Beam.rotation =  PI + global_position.angle_to_point(collision_pos)
 		update()
 	else:
 		$HitBox.monitoring = false
+		$Beam.visible = false
 		
 
 func _update_hitbox():
@@ -36,6 +40,5 @@ func _update_hitbox():
 
 func _draw():
 	if is_colliding():
-		 # Draw a red circle at the point
-		draw_circle(to_local(collision_pos), 10, Color(1, 0, 0))
-		draw_line(position,to_local(collision_pos), Color(1, 0, 0))
+		draw_line(position, to_local(collision_pos),
+		 Color(1, 0, 0), 4.0)
