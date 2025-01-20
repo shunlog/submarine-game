@@ -40,7 +40,6 @@ func spawn():
 
 func despawn():
 	var enemies = enemies_parent.get_children()
-	print('%d enemies remaining' % enemies.size())
 	for enemy in enemies:
 		if enemy.global_position.distance_to(global_position) > despawn_distance:
 			enemy.queue_free()

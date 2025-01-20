@@ -84,7 +84,6 @@ func _get_tile_price(tile_id):
 		return 0
 
 func tile_broken(tile_id: int):
-	print(tile_id)
 	money += _get_tile_price(tile_id)
 
 
@@ -156,7 +155,6 @@ func _update_dashboard():
 
 
 func _update_pause_menu():
-	print("updated pause menu")
 	HSliderSpeed.value = speed_level
 	if speed_level >= speed_price.size():
 		ButtonSpeed.text = "done"
