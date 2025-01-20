@@ -9,7 +9,7 @@ func _input(event):
 			self.enabled = event.pressed
 
 
-func _process(_delta):
+func _physics_process(delta):
 	var mouse_position = get_local_mouse_position()
 	var relative_position = mouse_position
 	cast_to = relative_position.clamped(500)

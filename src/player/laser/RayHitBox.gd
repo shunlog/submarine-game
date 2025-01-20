@@ -1,6 +1,8 @@
 extends Area2D
 
 func _physics_process(delta):
+	if not monitoring:
+		return
 	var areas = get_overlapping_areas()
 	for a in areas:
 		var parent = a.get_parent()
