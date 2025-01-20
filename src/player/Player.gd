@@ -92,10 +92,7 @@ func _ready():
 	PauseMenu.hide()
 
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
-			$RayCast2D.enabled = event.pressed
-	elif event.is_action_pressed("sonar"):
+	if event.is_action_pressed("sonar"):
 		toggle_sonar()
 
 func _process(delta):
