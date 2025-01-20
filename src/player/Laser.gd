@@ -16,7 +16,10 @@ func _physics_process(delta):
 	
 	if is_colliding():
 		collision_pos = get_collision_point()
-		get_parent().emit_signal("break_tile", collision_pos, 10)
+#		get_parent().emit_signal("break_tile", collision_pos, 10)
+		var tilemap = get_parent().BreakableTilemap
+		if tilemap:
+			tilemap.break_tile(collision_pos, 10)
 		$HitBox.global_position = collision_pos
 		$HitBox.monitoring = true
 		_update_hitbox()

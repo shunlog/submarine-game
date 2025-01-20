@@ -1,9 +1,8 @@
 extends KinematicBody2D
 
-signal break_tile(posn, damage)
-
-
+export var breakable_tilemap_node_path : NodePath
 export var sonar_color : Color
+
 const accel_fraction = 0.07  # fraction of the max_speed gained every frame on move
 const friction = .05  # fraction of velocity lost every frame in water
 const gravity_accel = 15  # px/s gained every second outside water
@@ -42,7 +41,7 @@ onready var ProgressBarFuel := $GUICanvasLayer/MarginContainer/VBoxContainer/das
 onready var ProgressBarPressure := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure/ProgressBarPressure
 onready var ButtonSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed
 onready var HSliderSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed
-
+onready var BreakableTilemap :BreakableTilemap = get_node(breakable_tilemap_node_path)
 
 const speed_price = [100, 200, 300, 400]
 
@@ -50,7 +49,7 @@ const speed_price = [100, 200, 300, 400]
 ## v is between 0 and 4
 func set_speed_level(v: int):
 	speed_level = v
-	max_speed = initial_max_speed * (1 + 0.2 * v)
+	max_speed = int(initial_max_speed * (1 + 0.2 * v))
 	_update_pause_menu()
 
 
@@ -60,7 +59,7 @@ func buy_speed():
 	if speed_price[speed_level] > money:
 		return
 	money -= speed_price[speed_level]
-	set_speed_level(min(speed_level + 1, 4))
+	set_speed_level(int(min(speed_level + 1, 4)))
 	_update_dashboard()
 
 
@@ -90,6 +89,8 @@ func tile_broken(tile_id: int):
 func _ready():
 	toggle_sonar(false)
 	PauseMenu.hide()
+	if not BreakableTilemap:
+		print("Warning: BreakableTilemap for player is not set.")
 
 func _input(event):
 	if event.is_action_pressed("sonar"):
@@ -175,16 +176,6 @@ func _on_HurtBox_area_entered(area):
 	velocity = knockback_direction * 5000
 	
 	# disable hurtbox for a second
-	$HurtBox.monitoring = false
-	var timer = Timer.new()
-	timer.wait_time = 1.0
-	timer.one_shot = true
-	timer.connect("timeout", self, "_on_timer_timeout")  # Connect the signal
-	add_child(timer)  # Add the timer to the scene tree
-	timer.start()  # Start the time
-	# Pause the function until the timer times out
-	yield(timer, "timeout")
-	$HurtBox.monitoring = true
 	
 	
 

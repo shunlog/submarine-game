@@ -1,5 +1,6 @@
 tool
 extends TileMap
+class_name BreakableTilemap
 
 signal tile_broken(tile_id)
 
