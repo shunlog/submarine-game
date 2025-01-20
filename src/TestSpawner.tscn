@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://world/BreakableTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://spawner/Spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shark/Shark.tscn" type="PackedScene" id=4]
 
 [node name="TestSpawner" type="Node2D"]
 
@@ -19,5 +20,8 @@ despawn_distance = 600
 wait_time = 2.0
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Shark" parent="." instance=ExtResource( 4 )]
+position = Vector2( 947, 950 )
 
 [editable path="Player/Spawner"]

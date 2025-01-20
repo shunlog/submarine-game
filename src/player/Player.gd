@@ -102,6 +102,9 @@ func _process(delta):
 	_update_dashboard()
 
 func _physics_process(delta):
+	
+	velocity = move_and_slide(velocity)
+	
 	var move_accel = max_speed * accel_fraction  # px/s gained every second
 	var force := Vector2.ZERO
 	
@@ -129,9 +132,6 @@ func _physics_process(delta):
 		velocity += Vector2(0, gravity_accel)
 	
 	velocity = velocity.clamped(max_speed)
-	
-	# Move the player with KinematicBody2D's move_and_slide method
-	velocity = move_and_slide(velocity)
 
 
 func _on_Area2DRadar_area_entered(area: Area2D):
@@ -148,8 +148,8 @@ func _update_dashboard():
 	LabelFPS.text = str(Engine.get_frames_per_second())
 	LabelMoney.text = str(money)
 	LabelEnemies.text = str(get_tree().get_nodes_in_group("enemies").size())
-	ProgressBarFuel.value = fuel / max_fuel * 100
-	ProgressBarHull.value = hull / max_hull * 100
+	ProgressBarFuel.value = float(fuel) / max_fuel * 100
+	ProgressBarHull.value = float(hull) / max_hull * 100
 	ProgressBarPressure.value = _get_depth_blocks() / max_pressure * 100
 	
 
@@ -170,3 +170,29 @@ func _update_pause_menu():
 			ButtonSpeed.disabled = false
 			ButtonSpeed.pressed = true
 	
+
+
+func _on_HurtBox_area_entered(area):
+	print("Hit!")
+	hull -= 10
+	print(hull)
+	
+	# Calculate knockback direction
+	var knockback_direction = (global_position - area.global_position).normalized()
+
+	# Apply the knockback
+	velocity = knockback_direction * 5000
+	
+	$HurtBox.monitoring = false
+	var timer = Timer.new()
+	timer.wait_time = 1.0  # Set the time in seconds
+	timer.one_shot = true  # Run only once
+	timer.connect("timeout", self, "_on_timer_timeout")  # Connect the signal
+	add_child(timer)  # Add the timer to the scene tree
+	timer.start()  # Start the time
+	# Pause the function until the timer times out
+	yield(timer, "timeout")
+	$HurtBox.monitoring = true
+	
+	
+

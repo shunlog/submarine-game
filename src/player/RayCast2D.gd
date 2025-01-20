@@ -7,7 +7,7 @@ extends RayCast2D
 
 var p := Vector2.ZERO
 
-# Called when the node enters the scene tree for the first time.
+
 func _process(_v):
 	
 	var mouse_position = get_local_mouse_position()
@@ -17,6 +17,7 @@ func _process(_v):
 	if is_colliding():
 		p = get_collision_point()
 		get_parent().emit_signal("break_tile", p, 10)
+		get_parent().emit_signal("hurt", p, 1)
 		update()
 	
 	
