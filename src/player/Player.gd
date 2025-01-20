@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export var breakable_tilemap_node_path : NodePath
+export var fog_node_path : NodePath
 export var sonar_color : Color
 
 const accel_fraction = 0.07  # fraction of the max_speed gained every frame on move
@@ -42,6 +43,8 @@ onready var ProgressBarPressure := $GUICanvasLayer/MarginContainer/VBoxContainer
 onready var ButtonSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed
 onready var HSliderSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed
 onready var BreakableTilemap :BreakableTilemap = get_node(breakable_tilemap_node_path)
+onready var Fog :Fog = get_node(fog_node_path)
+
 
 const speed_price = [100, 200, 300, 400]
 
@@ -97,6 +100,8 @@ func _input(event):
 		toggle_sonar()
 
 func _process(_delta):
+	if Fog:
+		Fog.update_fog(global_position)
 	_update_dashboard()
 
 func _physics_process(_delta):

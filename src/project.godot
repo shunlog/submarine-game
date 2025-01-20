@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "BreakableTilemap",
 "language": "GDScript",
 "path": "res://world/BreakableTileMap.gd"
+}, {
+"base": "Sprite",
+"class": "Fog",
+"language": "GDScript",
+"path": "res://fog/Fog.gd"
 } ]
 _global_script_class_icons={
-"BreakableTilemap": ""
+"BreakableTilemap": "",
+"Fog": ""
 }
 
 [application]

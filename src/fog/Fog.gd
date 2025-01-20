@@ -1,4 +1,5 @@
 extends Sprite
+class_name Fog
 
 export var LightTexture : StreamTexture
 
