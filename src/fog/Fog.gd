@@ -9,7 +9,9 @@ var fogImage := Image.new()
 var fogTexture := ImageTexture.new()
 var visited := {}
 onready var lightImage : Image = LightTexture.get_data()
-onready var light_offset = Vector2(LightTexture.get_width()/2, LightTexture.get_height()/2)
+onready var light_offset = Vector2(
+	LightTexture.get_width()/2.0, 
+	LightTexture.get_height()/2.0)
 	
 func _ready():
 	fogImage.create(fog_width, fog_height, false, Image.FORMAT_RGBAH)

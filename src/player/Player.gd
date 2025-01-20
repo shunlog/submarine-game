@@ -96,11 +96,10 @@ func _input(event):
 	if event.is_action_pressed("sonar"):
 		toggle_sonar()
 
-func _process(delta):
+func _process(_delta):
 	_update_dashboard()
 
-func _physics_process(delta):
-	
+func _physics_process(_delta):
 	velocity = move_and_slide(velocity)
 	
 	var move_accel = max_speed * accel_fraction  # px/s gained every second
@@ -129,7 +128,7 @@ func _physics_process(delta):
 	else:
 		velocity += Vector2(0, gravity_accel)
 	
-	velocity = velocity.clamped(max_speed)
+	velocity = velocity.limit_length(max_speed)
 
 
 func _on_Area2DRadar_area_entered(area: Area2D):

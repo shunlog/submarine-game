@@ -27,4 +27,3 @@ text = "This scene tests two things:
 position = Vector2( 146, 670 )
 
 [connection signal="tile_broken" from="TileMap" to="Player" method="tile_broken"]
-[connection signal="break_tile" from="Player" to="TileMap" method="break_tile"]

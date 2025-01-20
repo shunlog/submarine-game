@@ -9,10 +9,10 @@ func _input(event):
 			self.enabled = event.pressed
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var mouse_position = get_local_mouse_position()
 	var relative_position = mouse_position
-	cast_to = relative_position.clamped(500)
+	cast_to = relative_position.limit_length(500)
 	
 	if is_colliding():
 		collision_pos = get_collision_point()

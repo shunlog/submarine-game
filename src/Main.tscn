@@ -68,5 +68,4 @@ material = SubResource( 28 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[connection signal="break_tile" from="Player" to="GroundCanvasLayer/MainTileMap" method="break_tile"]
 [connection signal="tile_broken" from="GroundCanvasLayer/MainTileMap" to="Player" method="tile_broken"]

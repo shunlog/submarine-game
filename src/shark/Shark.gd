@@ -7,7 +7,7 @@ func target(player):
 	target_node = player
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if target_node:
 		var dir := position.direction_to(target_node.position)
 		$AnimatedSprite.flip_h = dir.x < 0

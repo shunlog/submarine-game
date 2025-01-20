@@ -5,16 +5,15 @@ extends Node2D
 export(bool) var generate setget set_generate
 export(bool) var clear setget set_clear
 
-func set_generate(value):
-	if value:  # When toggled, call the function
-		generate_tiles()
-		generate = false  # Reset the button
+func set_generate(_value):
+	generate_tiles()
+	generate = false  # Reset the button
 
 
-func set_clear(value):
-	if value:  # When toggled, call the function
-		clear()
-		clear = false  # Reset the button
+func set_clear(_value):
+	var tilemap: TileMap = get_parent()
+	tilemap.clear()
+	clear = false  # Reset the button
 
 
 export var width = 100       # Width of the tilemap in tiles
@@ -74,9 +73,3 @@ func generate_tiles():
 					tilemap.set_cell(x, y, tile)
 				elif not replace:
 					tilemap.set_cell(x, y, -1)
-
-
-
-func clear():
-	var tilemap: TileMap = get_parent()
-	tilemap.clear()
