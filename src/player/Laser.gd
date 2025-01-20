@@ -19,9 +19,19 @@ func _physics_process(delta):
 		get_parent().emit_signal("break_tile", collision_pos, 10)
 		$HitBox.global_position = collision_pos
 		$HitBox.monitoring = true
+		_update_hitbox()
 		update()
 	else:
 		$HitBox.monitoring = false
+		
+
+func _update_hitbox():
+	## should be called in _physics_process
+	var areas = $HitBox.get_overlapping_areas()
+	for a in areas:
+		var parent = a.get_parent()
+		if parent.is_in_group("enemies"):
+			parent.hurt(1)
 
 
 func _draw():

@@ -170,20 +170,15 @@ func _update_pause_menu():
 
 
 func _on_HurtBox_area_entered(area):
-	print("Hit!")
 	hull -= 10
-	print(hull)
-	
-	# Calculate knockback direction
 	var knockback_direction = (global_position - area.global_position).normalized()
-
-	# Apply the knockback
 	velocity = knockback_direction * 5000
 	
+	# disable hurtbox for a second
 	$HurtBox.monitoring = false
 	var timer = Timer.new()
-	timer.wait_time = 1.0  # Set the time in seconds
-	timer.one_shot = true  # Run only once
+	timer.wait_time = 1.0
+	timer.one_shot = true
 	timer.connect("timeout", self, "_on_timer_timeout")  # Connect the signal
 	add_child(timer)  # Add the timer to the scene tree
 	timer.start()  # Start the time
