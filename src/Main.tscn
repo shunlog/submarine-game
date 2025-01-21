@@ -1,11 +1,18 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://world/World.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/water_bg.bmp" type="Texture" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world/MainLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://spawner/Spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Water.gdshader" type="Shader" id=5]
+[ext_resource path="res://shark/Shark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fog/Fog.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Gradient" id=33]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="Gradient" id=32]
+colors = PoolColorArray( 0.882353, 0.882353, 0.882353, 1, 0, 0.0761719, 0.09375, 1 )
 
 [sub_resource type="OpenSimplexNoise" id=29]
 
@@ -16,37 +23,34 @@ noise = SubResource( 29 )
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 5 )
 shader_param/refraction_stretch = Vector2( 1, 1 )
-shader_param/refraction_strength = 0.008
-shader_param/water_tint = Plane( 0, 0, 0, 0 )
+shader_param/refraction_strength = 0.015
+shader_param/water_tint = Plane( 0.2, 0.6, 1, 0 )
 shader_param/speed = 0.092
 shader_param/refraction_map = SubResource( 30 )
 
 [node name="Node2D" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="Fog" parent="." instance=ExtResource( 9 )]
 z_index = -2
 grid_size = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 4064, 1653 )
-breakable_tilemap_node_path = NodePath("../GroundCanvasLayer/MainLevel/BreakableTileMap")
+position = Vector2( 3920, 1820 )
+breakable_tilemap_node_path = NodePath("../MainLevel/BreakableTileMap")
 fog_node_path = NodePath("../Fog")
+modulate_water_node_path = NodePath("../WaterParallaxBackground2/CanvasModulateWater")
+modulate_layer_node_path = NodePath("../CanvasModulate")
+gradient_max_depth = 5000
+GradientWater = SubResource( 33 )
+GradientLayer = SubResource( 32 )
 
 [node name="Spawner" parent="Player" instance=ExtResource( 4 )]
 enemies_parent_nodepath = NodePath("../../TransparentCanvasLayer/Sharks")
 
-[node name="GroundCanvasLayer" type="CanvasLayer" parent="."]
-layer = -2
-follow_viewport_enable = true
-
-[node name="TilesModulate" type="CanvasModulate" parent="GroundCanvasLayer"]
-position = Vector2( 193, 283 )
-color = Color( 0.0627451, 0.188235, 0.411765, 1 )
-
-[node name="MainLevel" parent="GroundCanvasLayer" instance=ExtResource( 3 )]
-
 [node name="TransparentCanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
+layer = -10
 follow_viewport_enable = true
 
 [node name="TransparentModulate" type="CanvasModulate" parent="TransparentCanvasLayer"]
@@ -55,16 +59,36 @@ color = Color( 0.439216, 0.0901961, 0.0901961, 0 )
 
 [node name="Sharks" type="Node2D" parent="TransparentCanvasLayer"]
 
-[node name="World" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 1721 )
+[node name="Shark" parent="TransparentCanvasLayer/Sharks" instance=ExtResource( 6 )]
+position = Vector2( 3585, 1775 )
 
 [node name="Shader" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="WaterShader" type="ColorRect" parent="Shader"]
 material = SubResource( 28 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[connection signal="tile_broken" from="GroundCanvasLayer/MainLevel/BreakableTileMap" to="Player" method="tile_broken"]
+[node name="MainLevel" parent="." instance=ExtResource( 3 )]
+z_index = -10
 
-[editable path="GroundCanvasLayer/MainLevel"]
+[node name="WaterParallaxBackground2" type="ParallaxBackground" parent="."]
+layer = -30
+scroll_offset = Vector2( 100, 100 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="WaterParallaxBackground2"]
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 4000, 4000 )
+
+[node name="WaterTexture" type="TextureRect" parent="WaterParallaxBackground2/ParallaxLayer"]
+margin_right = 4000.0
+margin_bottom = 4000.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="CanvasModulateWater" type="CanvasModulate" parent="WaterParallaxBackground2"]
+
+[connection signal="tile_broken" from="MainLevel/BreakableTileMap" to="Player" method="tile_broken"]
+
+[editable path="MainLevel"]

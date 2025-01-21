@@ -13,31 +13,30 @@ width = 4000
 height = 1080
 fill_to = Vector2( 0, 1 )
 
-[node name="World" type="Node2D"]
+[node name="Background" type="Node2D"]
 
 [node name="WaterParallaxBackground2" type="ParallaxBackground" parent="."]
+layer = -30
 scroll_offset = Vector2( 100, 100 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="WaterParallaxBackground2"]
-z_index = -100
-motion_scale = Vector2( 0.2, 0.2 )
+motion_scale = Vector2( 0.5, 0.5 )
 motion_mirroring = Vector2( 4000, 4000 )
 
 [node name="WaterTexture" type="TextureRect" parent="WaterParallaxBackground2/ParallaxLayer"]
 margin_right = 4000.0
 margin_bottom = 4000.0
 texture = ExtResource( 1 )
-stretch_mode = 1
+stretch_mode = 2
 
-[node name="BgModulate" type="CanvasModulate" parent="WaterParallaxBackground2"]
-position = Vector2( 955, 27 )
-color = Color( 0, 0.00784314, 0.027451, 1 )
+[node name="CanvasModulate" type="CanvasModulate" parent="WaterParallaxBackground2"]
+color = Color( 0, 0, 0, 1 )
 
 [node name="SkyParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -5
+layer = -20
 
 [node name="SkyParallaxLayer" type="ParallaxLayer" parent="SkyParallaxBackground"]
-z_index = -46
+z_index = -101
 motion_mirroring = Vector2( 4000, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="SkyParallaxBackground/SkyParallaxLayer"]
@@ -46,16 +45,26 @@ margin_right = 4000.0
 texture = SubResource( 24 )
 expand = true
 
-[node name="Clouds" type="Sprite" parent="SkyParallaxBackground/SkyParallaxLayer"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SkyParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+
+[node name="Clouds" type="Sprite" parent="SkyParallaxBackground/ParallaxLayer"]
 position = Vector2( 653, -429 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 8 )
 region_enabled = true
-region_rect = Rect2( 10, 0, 90, 30 )
+region_rect = Rect2( 18.9401, 5.99467, 80.9541, 22.9207 )
 
-[node name="Clouds2" type="Sprite" parent="SkyParallaxBackground/SkyParallaxLayer"]
-position = Vector2( 2243, -607 )
+[node name="Clouds2" type="Sprite" parent="SkyParallaxBackground/ParallaxLayer"]
+position = Vector2( 1871, -709 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 8 )
 region_enabled = true
-region_rect = Rect2( 180, 50, 80, 70 )
+region_rect = Rect2( 189.139, 59.6389, 70.8614, 47.3045 )
+
+[node name="Clouds3" type="Sprite" parent="SkyParallaxBackground/ParallaxLayer"]
+position = Vector2( 2902, -259 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 310.082, 8.92072, 45.8415, 22.9207 )

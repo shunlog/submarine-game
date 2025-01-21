@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-export var breakable_tilemap_node_path : NodePath
-export var fog_node_path : NodePath
 export var sonar_color : Color
 
 const accel_fraction = 0.07  # fraction of the max_speed gained every frame on move
@@ -28,9 +26,23 @@ var fuel := max_fuel
 var money := 600
 var sonar := false
 
+export var breakable_tilemap_node_path : NodePath
+onready var BreakableTilemap :BreakableTilemap = get_node(breakable_tilemap_node_path)
+export var fog_node_path : NodePath
+onready var Fog :Fog = get_node(fog_node_path)
+export var modulate_water_node_path : NodePath
+onready var ModulateWater :CanvasModulate = get_node(modulate_water_node_path)
+export var modulate_layer_node_path : NodePath
+onready var ModulateLayer :CanvasModulate = get_node(modulate_layer_node_path)
+
+# Gradient for the modulation of bg and main layers
+export var gradient_max_depth :int # depth in pixels where the gradient end is reached
+export var GradientWater :Gradient
+export var GradientLayer :Gradient
+
 
 onready var sprite := $Sprite
-onready var NodeShadow := $ShadowLight
+onready var TranspLight := $TransparencyLight
 onready var PauseMenu := $PauseCanvasLayer
 onready var LabelSpeed := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/speed/LabelSpeed
 onready var LabelSonar := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/sonar/LabelSonar
@@ -42,8 +54,6 @@ onready var ProgressBarFuel := $GUICanvasLayer/MarginContainer/VBoxContainer/das
 onready var ProgressBarPressure := $GUICanvasLayer/MarginContainer/VBoxContainer/dashboard/pressure/ProgressBarPressure
 onready var ButtonSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed
 onready var HSliderSpeed = $PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed
-onready var BreakableTilemap :BreakableTilemap = get_node(breakable_tilemap_node_path)
-onready var Fog :Fog = get_node(fog_node_path)
 
 
 const speed_price = [100, 200, 300, 400]
@@ -70,8 +80,8 @@ func buy_speed():
 func toggle_sonar(v: bool = !sonar):
 	sonar = v
 	LabelSonar.text = str(v)
-	NodeShadow.shadow_enabled = !v
-	NodeShadow.color = sonar_color if v else Color.white
+	TranspLight.shadow_enabled = !v
+	TranspLight.color = sonar_color if v else Color.white
 
 func _get_tile_price(tile_id):
 	if tile_id == 3:
@@ -103,7 +113,16 @@ func _unhandled_input(event):
 func _process(_delta):
 	if Fog:
 		Fog.update_fog(global_position)
+	_update_modulate_canvas()
 	_update_dashboard()
+
+func _update_modulate_canvas():
+	var gradient_x = position.y / gradient_max_depth
+	if ModulateLayer:
+		ModulateLayer.color = GradientLayer.interpolate(gradient_x)
+	if ModulateWater:
+		ModulateWater.color = GradientWater.interpolate(gradient_x)
+
 
 func _physics_process(_delta):
 	_physics_process_laser()
@@ -177,7 +196,6 @@ func pause_toggle():
 
 
 func _update_pause_menu():
-	print("update")
 	HSliderSpeed.value = speed_level
 	if speed_level >= speed_price.size():
 		ButtonSpeed.text = "done"

@@ -114,14 +114,14 @@ playing = true
 current = true
 zoom = Vector2( 1.34, 1.34 )
 
-[node name="ShadowLight" type="Light2D" parent="."]
+[node name="TransparencyLight" type="Light2D" parent="."]
 position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 texture_scale = 20.73
 mode = 2
 range_z_min = -817
-range_layer_min = -1
-range_layer_max = -1
+range_layer_min = -10
+range_layer_max = -10
 shadow_gradient_length = 4.2
 
 [node name="BgLight" type="Light2D" parent="."]
@@ -129,12 +129,10 @@ position = Vector2( 0, 4 )
 scale = Vector2( 0.991296, 0.991988 )
 texture = ExtResource( 6 )
 texture_scale = 15.32
-color = Color( 0, 0.584314, 0.407843, 1 )
+color = Color( 0.0235294, 0.831373, 0.470588, 1 )
 energy = 0.63
-range_z_min = -100
-range_z_max = -100
-range_layer_min = -100
-range_layer_max = -100
+range_layer_min = -30
+range_layer_max = -30
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_gradient_length = 5.7
@@ -144,12 +142,10 @@ shadow_filter_smooth = 12.8
 [node name="GroundLight" type="Light2D" parent="."]
 texture = ExtResource( 4 )
 texture_scale = 4.34
-color = Color( 1, 0.968627, 0.501961, 1 )
+color = Color( 0.784314, 1, 0.501961, 1 )
 energy = 1.34
-range_z_min = -35
-range_z_max = -26
-range_layer_min = -94
-range_layer_max = -1
+range_z_min = -10
+range_z_max = -10
 shadow_filter_smooth = 2.1
 
 [node name="Sprite" type="Sprite" parent="."]
