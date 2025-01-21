@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Fog",
 "language": "GDScript",
 "path": "res://fog/Fog.gd"
+}, {
+"base": "Camera2D",
+"class": "MapCamera2D",
+"language": "GDScript",
+"path": "res://MapCamera2D.gd"
 } ]
 _global_script_class_icons={
 "BreakableTilemap": "",
-"Fog": ""
+"Fog": "",
+"MapCamera2D": ""
 }
 
 [application]
