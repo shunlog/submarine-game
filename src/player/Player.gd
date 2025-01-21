@@ -92,8 +92,7 @@ func tile_broken(tile_id: int):
 func _ready():
 	toggle_sonar(false)
 	PauseMenu.hide()
-	if not BreakableTilemap:
-		print("Warning: BreakableTilemap for player is not set.")
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("sonar"):

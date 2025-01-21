@@ -12,7 +12,6 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 2431, 1661 )
 breakable_tilemap_node_path = NodePath("../MailLevel/BreakableTileMap")
-sonar_color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0

@@ -6,6 +6,7 @@ signal tile_broken(tile_id)
 var tiles_health = {}  # Dictionary to store health of tiles
 
 
+# Take in a global position
 func break_tile(posn: Vector2, damage: int):
 	posn = to_local(posn)
 	var tile_position := world_to_map(posn)
