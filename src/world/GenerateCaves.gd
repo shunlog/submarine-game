@@ -5,13 +5,17 @@ extends Node2D
 export(bool) var generate setget set_generate
 export(bool) var clear setget set_clear
 
+
+export var tilemap_path: NodePath
+
+
 func set_generate(_value):
 	generate_tiles()
 	generate = false  # Reset the button
 
 
 func set_clear(_value):
-	var tilemap: TileMap = get_parent()
+	var tilemap :TileMap= get_node(tilemap_path)
 	tilemap.clear()
 	clear = false  # Reset the button
 
@@ -42,6 +46,7 @@ func gen_image(noise: OpenSimplexNoise, sprite_node: Sprite):
 
 
 func generate_tiles():
+	var tilemap :TileMap= get_node(tilemap_path)
 	var noise = OpenSimplexNoise.new()
 	noise.period = noise_period
 	noise.octaves = noise_octaves
@@ -49,9 +54,6 @@ func generate_tiles():
 	noise.persistence = noise_persistence
 	noise.seed = noise_seed
 
-	var tilemap: TileMap = get_parent()
-#	gen_image(noise, tilemap.find_node('Sprite'))
-	
 	var rng = RandomNumberGenerator.new()
 	rng.seed = 1234
 	

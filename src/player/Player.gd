@@ -95,9 +95,11 @@ func _ready():
 	if not BreakableTilemap:
 		print("Warning: BreakableTilemap for player is not set.")
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("sonar"):
 		toggle_sonar()
+	if event.is_action_pressed("pause"):
+		pause_toggle()
 
 func _process(_delta):
 	if Fog:
@@ -105,6 +107,11 @@ func _process(_delta):
 	_update_dashboard()
 
 func _physics_process(_delta):
+	_physics_process_laser()
+	_physics_process_movement()
+
+
+func _physics_process_movement():
 	velocity = move_and_slide(velocity)
 	
 	var move_accel = max_speed * accel_fraction  # px/s gained every second
@@ -136,6 +143,12 @@ func _physics_process(_delta):
 	velocity = velocity.limit_length(max_speed)
 
 
+func _physics_process_laser():
+	if not BreakableTilemap or not $Laser.is_colliding():
+		return
+	BreakableTilemap.break_tile($Laser.get_collision_point(), 10)
+
+
 func _on_Area2DRadar_area_entered(area: Area2D):
 	# Assuming the Area2D is a child of the enemy with a "target" method
 	var actor = area.get_parent()
@@ -153,10 +166,19 @@ func _update_dashboard():
 	ProgressBarFuel.value = float(fuel) / max_fuel * 100
 	ProgressBarHull.value = float(hull) / max_hull * 100
 	ProgressBarPressure.value = _get_depth_blocks() / max_pressure * 100
-	
+
+
+func pause_toggle():
+	if get_tree().paused:
+		PauseMenu.hide()
+	else:
+		_update_pause_menu()
+		PauseMenu.show()
+	get_tree().paused = !get_tree().paused
 
 
 func _update_pause_menu():
+	print("update")
 	HSliderSpeed.value = speed_level
 	if speed_level >= speed_price.size():
 		ButtonSpeed.text = "done"

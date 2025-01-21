@@ -43,18 +43,22 @@ color_ramp = SubResource( 7 )
 hue_variation_curve = SubResource( 9 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=13]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=15]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 48, 16, 16 )
 
@@ -407,7 +411,7 @@ text = "Speed"
 
 [node name="HSliderSpeed" type="HSlider" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
 margin_left = 116.0
-margin_right = 837.0
+margin_right = 842.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 max_value = 4.0
@@ -416,7 +420,7 @@ tick_count = 5
 ticks_on_borders = true
 
 [node name="ButtonSpeed" type="CheckButton" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
-margin_left = 841.0
+margin_left = 846.0
 margin_right = 940.324
 margin_bottom = 60.251
 text = "100"
@@ -430,7 +434,7 @@ text = "Mining"
 [node name="HSliderMining" type="HSlider" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
 margin_left = 116.0
 margin_top = 64.0
-margin_right = 837.0
+margin_right = 842.0
 margin_bottom = 106.0
 size_flags_horizontal = 3
 max_value = 4.0
@@ -439,7 +443,7 @@ tick_count = 5
 ticks_on_borders = true
 
 [node name="ButtonMining" type="CheckButton" parent="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
-margin_left = 841.0
+margin_left = 846.0
 margin_top = 64.0
 margin_right = 940.324
 margin_bottom = 124.251
@@ -448,5 +452,6 @@ text = "100"
 
 [connection signal="area_entered" from="Area2DRadar" to="." method="_on_Area2DRadar_area_entered"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="unpause" from="PauseCanvasLayer" to="." method="pause_toggle"]
 [connection signal="value_changed" from="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/HSliderSpeed" to="." method="set_speed_level"]
 [connection signal="pressed" from="PauseCanvasLayer/MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/ButtonSpeed" to="." method="buy_speed"]

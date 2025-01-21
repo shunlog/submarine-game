@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://world/MainTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/MainLevel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://FlatUI/kenneyUI-blue.tres" type="Theme" id=3]
 [ext_resource path="res://shark/Shark.tscn" type="PackedScene" id=4]
 
 [node name="TestTilemap" type="Node2D"]
 
-[node name="TileMap" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 996 )
+[node name="MailLevel" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2859, 649 )
+position = Vector2( 2431, 1661 )
+breakable_tilemap_node_path = NodePath("../MailLevel/BreakableTileMap")
 sonar_color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="."]
@@ -24,6 +24,6 @@ text = "This scene tests two things:
 2. What the main tilemap feels like without any extra noise"
 
 [node name="Shark" parent="." instance=ExtResource( 4 )]
-position = Vector2( 146, 670 )
+position = Vector2( 1080, 1867 )
 
-[connection signal="tile_broken" from="TileMap" to="Player" method="tile_broken"]
+[editable path="MailLevel"]

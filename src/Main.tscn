@@ -2,7 +2,7 @@
 
 [ext_resource path="res://world/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://world/MainTileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world/MainLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://spawner/Spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Water.gdshader" type="Shader" id=5]
 [ext_resource path="res://fog/Fog.tscn" type="PackedScene" id=9]
@@ -29,7 +29,7 @@ grid_size = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 4064, 1653 )
-breakable_tilemap_node_path = NodePath("../GroundCanvasLayer/MainTileMap")
+breakable_tilemap_node_path = NodePath("../GroundCanvasLayer/MainLevel/BreakableTileMap")
 fog_node_path = NodePath("../Fog")
 
 [node name="Spawner" parent="Player" instance=ExtResource( 4 )]
@@ -43,8 +43,7 @@ follow_viewport_enable = true
 position = Vector2( 193, 283 )
 color = Color( 0.0627451, 0.188235, 0.411765, 1 )
 
-[node name="MainTileMap" parent="GroundCanvasLayer" instance=ExtResource( 3 )]
-position = Vector2( 0, 2209 )
+[node name="MainLevel" parent="GroundCanvasLayer" instance=ExtResource( 3 )]
 
 [node name="TransparentCanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -66,4 +65,6 @@ material = SubResource( 28 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[connection signal="tile_broken" from="GroundCanvasLayer/MainTileMap" to="Player" method="tile_broken"]
+[connection signal="tile_broken" from="GroundCanvasLayer/MainLevel/BreakableTileMap" to="Player" method="tile_broken"]
+
+[editable path="GroundCanvasLayer/MainLevel"]

@@ -1,4 +1,3 @@
-tool
 extends TileMap
 class_name BreakableTilemap
 
@@ -6,21 +5,7 @@ signal tile_broken(tile_id)
 
 var tiles_health = {}  # Dictionary to store health of tiles
 
-## Run all the generation layers,
-## assuming they are the nodes following the first child
-export(bool) var generate setget set_generate
-func set_generate(value):
-	if value:  # When toggled, call the function
-		var c = get_children()
-		for i in range(1, c.size()):
-			var n = c[i]
-			var orig = n.replace
-			n.replace = true if i > 1 else false
-			n.generate = true
-			n.replace = orig
-		generate = false  # Reset the button
 
- 
 func break_tile(posn: Vector2, damage: int):
 	posn = to_local(posn)
 	var tile_position := world_to_map(posn)
