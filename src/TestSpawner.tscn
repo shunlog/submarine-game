@@ -12,6 +12,7 @@ tile_data = PoolIntArray( 393201, 2, 0, 393202, 2, 0, 393203, 2, 0, 393204, 2, 0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 829, 1293 )
+fog_enabled = false
 
 [node name="Spawner" parent="Player" instance=ExtResource( 3 )]
 despawn_distance = 600

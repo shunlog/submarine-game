@@ -8,4 +8,5 @@
 [node name="BreakableTileMap" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+fog_enabled = false
 breakable_tilemap_node_path = NodePath("../BreakableTileMap")

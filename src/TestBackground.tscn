@@ -8,3 +8,4 @@
 [node name="Background" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+fog_enabled = false
