@@ -11,6 +11,7 @@
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 2431, 1661 )
+fog_enabled = false
 breakable_tilemap_node_path = NodePath("../MailLevel/BreakableTileMap")
 
 [node name="Label" type="Label" parent="."]

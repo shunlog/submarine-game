@@ -25,11 +25,10 @@ var hull := max_hull
 var fuel := max_fuel
 var money := 600
 var sonar := false
+export var fog_enabled := true
 
 export var breakable_tilemap_node_path : NodePath
 onready var BreakableTilemap :BreakableTilemap = get_node(breakable_tilemap_node_path)
-export var fog_node_path : NodePath
-onready var Fog :Fog = get_node(fog_node_path)
 export var modulate_water_node_path : NodePath
 onready var ModulateWater :CanvasModulate = get_node(modulate_water_node_path)
 export var modulate_layer_node_path : NodePath
@@ -42,7 +41,10 @@ export var GradientLayer :Gradient
 
 
 onready var sprite := $Sprite
+onready var Fog := $FogCanvasLayer/Fog
 onready var TranspLight := $TransparencyLight
+onready var BgLight := $BgLight
+onready var GroundLight := $GroundLight
 onready var PauseMenu := $PauseCanvasLayer
 onready var LabelSpeed := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/speed/LabelSpeed
 onready var LabelSonar := $GUICanvasLayer/MarginContainer/VBoxContainer/debug/sonar/LabelSonar
@@ -83,6 +85,11 @@ func toggle_sonar(v: bool = !sonar):
 	TranspLight.shadow_enabled = !v
 	TranspLight.color = sonar_color if v else Color.white
 
+
+func _toggle_fog(v: bool = !fog_enabled):
+	Fog.visible = v
+
+
 func _get_tile_price(tile_id):
 	if tile_id == 3:
 		return 10
@@ -101,8 +108,11 @@ func tile_broken(tile_id: int):
 
 func _ready():
 	toggle_sonar(false)
+	_toggle_fog(fog_enabled)
 	PauseMenu.hide()
-
+	TranspLight.visible = true
+	BgLight.visible = true
+	GroundLight.visible = true
 
 func _unhandled_input(event):
 	if event.is_action_pressed("sonar"):
