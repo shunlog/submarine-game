@@ -36,7 +36,7 @@ export var modulate_layer_node_path : NodePath
 onready var ModulateLayer :CanvasModulate = get_node(modulate_layer_node_path)
 
 # Gradient for the modulation of bg and main layers
-export var gradient_max_depth :int # depth in pixels where the gradient end is reached
+export var gradient_max_depth :int = 5000 # depth in pixels where the gradient end is reached
 export var GradientWater :Gradient
 export var GradientLayer :Gradient
 

@@ -42,7 +42,6 @@ breakable_tilemap_node_path = NodePath("../MainLevel/BreakableTileMap")
 fog_node_path = NodePath("../Fog")
 modulate_water_node_path = NodePath("../WaterParallaxBackground2/CanvasModulateWater")
 modulate_layer_node_path = NodePath("../CanvasModulate")
-gradient_max_depth = 5000
 GradientWater = SubResource( 33 )
 GradientLayer = SubResource( 32 )
 
